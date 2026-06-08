@@ -40,7 +40,7 @@ public class Usuario {
 	private String rol;
 
 	@OneToMany(mappedBy = "usuario")
-	@ListProperties(fechaCreacion, puntajeFinal, tiempoTotalPrueba)
+	@ListProperties("fechaCreacion, puntajeFinal, tiempoTotalPrueba")
 	private Collection<Evaluacion> evaluaciones;
 
 	
