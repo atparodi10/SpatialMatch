@@ -13,7 +13,20 @@ public class SiguientePreguntaAction extends ViewBaseAction {
     public void execute() throws Exception {
         LocalDateTime horaClic = LocalDateTime.now();
 
-        String opcionSeleccionada = getView().getValueString("opcionSeleccionada");
+        Object valorVista = getView().getValue("opcionSeleccionada");
+        RegistroRespuesta.OpcionValida opcionEnum = null;
+
+        if (valorVista != null) {
+            if (valorVista instanceof Integer) {
+                // Si OpenXava devuelve el índice numérico (0=A, 1=B, etc.)
+                opcionEnum = RegistroRespuesta.OpcionValida.values()[(Integer) valorVista];
+            } else {
+                // Por seguridad, si lo devuelve como texto directo
+                opcionEnum = RegistroRespuesta.OpcionValida.valueOf(valorVista.toString());
+            }
+        }
+        // --------------------------------------------------
+
         LocalDateTime horaInicioPregunta = (LocalDateTime) getView().getValue("horaInicioTemporal");
 
         String idEvaluacion = getView().getValueString("evaluacion.id");
@@ -25,14 +38,18 @@ public class SiguientePreguntaAction extends ViewBaseAction {
         RegistroRespuesta registro = new RegistroRespuesta();
         registro.setEvaluacion(evaluacion);
         registro.setPregunta(preguntaActual);
-        registro.setOpcionSeleccionada(opcionSeleccionada);
+
+        // Asignamos la variable ya convertida correctamente a Enum
+        registro.setOpcionSeleccionada(opcionEnum);
+
         registro.setHoraInicio(horaInicioPregunta);
         registro.setHoraRespuesta(horaClic);
 
         XPersistence.getManager().persist(registro);
 
-        // (Logica para cargar la siguiente pregunta a la vista)
+        // (Lógica para cargar la siguiente pregunta a la vista)
 
+        // Limpiamos la pantalla y reiniciamos el cronómetro
         getView().setValue("opcionSeleccionada", "");
         getView().setValue("horaInicioTemporal", horaClic);
     }
