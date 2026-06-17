@@ -1,35 +1,37 @@
 <?xml version = "1.0" encoding = "ISO-8859-1"?>
+<!DOCTYPE controllers SYSTEM "dtds/controllers.dtd">
 
-<!DOCTYPE controladores SYSTEM "dtds/controladores.dtd">
+<controllers>
 
-<!-- 
-Documentación sobre controladores: 
-https://www.openxava.org/OpenXavaDoc/docs/controllers_es.html
+    <!-- 1. Controlador para la pantalla principal de la Evaluación -->
+    <controller name="EvaluacionController">
+        <!-- Heredamos de Typical para conservar los botones nativos (Nuevo, Guardar, etc.) -->
+        <extends controller="Typical"/>
 
-Controladores por defecto, incluidos en OpenXava (puedes extender de ellos):
-https://github.com/openxava/openxava/blob/master/openxava/src/main/resources/xava/default-controllers.xml
- 
-Ejemplos de controladores (de la aplicación de pruebas):
-https://github.com/openxava/openxava/blob/master/openxavatest/src/main/resources/xava/controllers.xml
--->
+        <!-- Nuestro botón personalizado para arrancar -->
+        <action name="iniciarPrueba"
+                class="ni.edu.uam.SpatialMatch.acciones.IniciarEvaluacionAction"
+                mode="detail"
+                icon="play" />
+    </controller>
 
-<controladores>
-    
-    <!-- Variable de entorno: 
-    <var-entorno nombre="SpatialMatch_ANYO_DEFECTO" valor="2015"/>
-    -->
-    
-    <!-- Objeto de sesión:
-    <Objeto nombre="SpatialMatch_anyoActivo" clase="java.lang.Integer" valor="2015" 
-            ambito="global"/>
-    -->
-    
-    <!-- Controlador:
-    <controlador nombre="Profesor">
-        <hereda-de controlador="Typical"/>
-        <accion nombre="new" icono="plus-box-multiple" atajo-de-teclado="Control N" 
-                clase="acciones.CrearProfesor"/>        
-    </controlador>
-    -->
-    
-</controladores>
+
+    <!-- 2. Controlador para la pantalla donde se ven las preguntas (La Prueba Activa) -->
+    <controller name="PruebaActivaController">
+        <!-- NOTA: No heredamos de Typical porque aquí no queremos que el usuario
+             vea el botón de "Borrar" o "Crear Nuevo". Solo queremos que responda. -->
+
+        <!-- Botón para avanzar a la siguiente pregunta -->
+        <action name="siguientePregunta"
+                class="ni.edu.uam.SpatialMatch.acciones.SiguientePreguntaAction"
+                mode="detail"
+                icon="arrow-right" />
+
+        <!-- Botón para forzar la finalización manual (Opcional, pero recomendado tenerlo) -->
+        <action name="finalizarPrueba"
+                class="ni.edu.uam.SpatialMatch.acciones.FinalizarEvaluacionAction"
+                mode="detail"
+                icon="stop" />
+    </controller>
+
+</controllers>

@@ -2,23 +2,28 @@
 
 <!DOCTYPE aplicacion SYSTEM "dtds/aplicacion.dtd">
 
-<aplicacion nombre="SpatialMatch"> 
-	
+<aplicacion nombre="SpatialMatch">
+
 	<!--
-	Un módulo por defecto se asume para cada
-	controlador en <modulo-defecto/> 
-	-->
-	<modulo-defecto>		  
-		<controlador nombre="Typical"/>		
+Un módulo por defecto se asume para cada
+controlador en <modulo-defecto/>
+-->
+	<modulo-defecto>
+		<controlador nombre="Typical"/>
 	</modulo-defecto>
-	
-	<!--
-	Podemos definir módulos adicionales, por ejemplo: 	
-	<modulo nombre="ProfesorSoloLectura">
-		<modelo nombre="Profesor"/>
-		<controlador nombre="Print"/>
-	</modulo>		
-	-->	  
-		
+
+	<!-- Configuración del Módulo Evaluación -->
+	<modulo nombre="Evaluacion">
+		<modelo nombre="Evaluacion"/>
+		<!-- Le inyectamos el controlador que tiene el botón "Iniciar Prueba" -->
+		<controlador nombre="EvaluacionController"/>
+	</modulo>
+
+	<!-- Configuración del Módulo para responder las preguntas -->
+	<modulo nombre="RegistroRespuesta">
+		<modelo nombre="RegistroRespuesta"/>
+		<!-- Le inyectamos el controlador que tiene los botones "Siguiente" y "Finalizar" -->
+		<controlador nombre="PruebaActivaController"/>
+	</modulo>
 </aplicacion>
 
