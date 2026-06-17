@@ -15,7 +15,7 @@ public class FinalizarEvaluacionAction extends ViewBaseAction {
         LocalDateTime horaFinalPrueba = LocalDateTime.now();
         LocalDateTime horaInicioPrueba = (LocalDateTime) getView().getValue("horaInicioTemporalPruebaGeneral");
 
-        String idEvaluacion = getView().getValueString("evaluacion.id");
+        String idEvaluacion = getView().getValueString("evaluacion.Oid");
         Evaluacion evaluacion = XPersistence.getManager().find(Evaluacion.class, idEvaluacion);
 
         // Calcular el tiempo total de la prueba
@@ -36,8 +36,13 @@ public class FinalizarEvaluacionAction extends ViewBaseAction {
         }
         evaluacion.setPuntajeFinal(puntosTotales);
 
+        evaluacion.generarRetroalimentacion();
+
         // Guardamos los cálculos finales
         XPersistence.getManager().merge(evaluacion);
+
+        // [FRONTEND: Aquí se puede redirigir al estudiante a un HTML de "Resultados"
+        // o mostrar una ventana emergente (modal) con su puntaje final]
 
         addMessage("Prueba finalizada con éxito. Respuestas enviadas.");
     }
