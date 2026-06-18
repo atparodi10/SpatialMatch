@@ -41,9 +41,14 @@ public class Usuario {
 	@Stereotype("PASSWORD")
 	private String password;
 
-	@Column(length = 50)
+	public enum RolUsuario {
+		ADMIN, ENCUESTADO
+	}
+
+	@Enumerated(EnumType.STRING)
+	@Column(length = 20)
 	@Required
-	private String rol;
+	private RolUsuario rol;
 
 	@Column
 	@ReadOnly // Se bloquea en la interfaz para que el administrador no lo cambie manualmente
