@@ -21,6 +21,13 @@
     	<class>com.openxava.naviox.model.SSORecord</class>
     	<class>com.openxava.naviox.model.User</class>
 		<class>com.openxava.naviox.model.LDAPConfiguration</class>
+
+		<!-- Nuestras entidades del proyecto SpatialMatch -->
+		<class>ni.edu.uam.SpatialMatch.modelo.Usuario</class>
+		<class>ni.edu.uam.SpatialMatch.modelo.Pregunta</class>
+		<class>ni.edu.uam.SpatialMatch.modelo.Evaluacion</class>
+		<class>ni.edu.uam.SpatialMatch.modelo.RegistroRespuesta</class>
+
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="update"/>
         </properties>
