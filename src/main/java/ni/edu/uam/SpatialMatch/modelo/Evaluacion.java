@@ -18,7 +18,7 @@ public class Evaluacion {
     @Id
     @GeneratedValue(generator = "system-uuid")
     @Hidden
-    @GenericGenerator(name = "uuid", strategy = "uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
     @Column(length = 36)
     private String oid;
 
@@ -88,6 +88,8 @@ public class Evaluacion {
         return this.retroalimentacion;
 
     }
+
+
 
 
 
