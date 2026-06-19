@@ -6,7 +6,6 @@ import ni.edu.uam.SpatialMatch.modelo.RegistroRespuesta;
 import ni.edu.uam.SpatialMatch.modelo.Evaluacion;
 import ni.edu.uam.SpatialMatch.modelo.Pregunta;
 
-import javax.persistence.TypedQuery;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -14,8 +13,10 @@ public class SiguientePreguntaAction extends ViewBaseAction {
 
     @Override
     public void execute() throws Exception {
+
         LocalDateTime horaClic = LocalDateTime.now();
 
+        // Extraer la opción seleccionada de la vista (tu lógica estricta)
         Object valorVista = getView().getValue("opcionSeleccionada");
         RegistroRespuesta.OpcionValida opcionEnum = null;
 
@@ -29,8 +30,9 @@ public class SiguientePreguntaAction extends ViewBaseAction {
             }
         }
 
-        LocalDateTime horaInicioPregunta = (LocalDateTime) getView().getValue("horaInicioTemporal");
-
+        // Recuperar IDs y reloj usando los nombres definidos en IniciarEvaluacionAction
+        // (Cambios en nombre de variables 'horaInicioTemporal' por 'horaInicioPregunta')
+        LocalDateTime horaInicioPregunta = (LocalDateTime) getView().getObject("horaInicioPregunta");
 
         String idEvaluacion = getView().getValueString("evaluacion.oid");
         String idPreguntaActual = getView().getValueString("pregunta.id");
@@ -38,7 +40,7 @@ public class SiguientePreguntaAction extends ViewBaseAction {
         Evaluacion evaluacion = XPersistence.getManager().find(Evaluacion.class, idEvaluacion);
         Pregunta preguntaActual = XPersistence.getManager().find(Pregunta.class, idPreguntaActual);
 
-
+        // Guardar el registro manualmente
         RegistroRespuesta registro = new RegistroRespuesta();
         registro.setEvaluacion(evaluacion);
         registro.setPregunta(preguntaActual);
@@ -48,33 +50,31 @@ public class SiguientePreguntaAction extends ViewBaseAction {
 
         XPersistence.getManager().persist(registro);
 
-        // (Lógica para cargar la siguiente pregunta a la vista)
+        // ==========================================================
+        // 4. LÓGICA ALEATORIA PARA LA SIGUIENTE PREGUNTA
+        // ==========================================================
 
-        int numeroSiguiente = preguntaActual.getNumeroPregunta() + 1;
+        @SuppressWarnings("unchecked")
+        List<String> pendientes = (List<String>) getView().getObject("preguntasPendientes");
 
-        TypedQuery<Pregunta> query = XPersistence.getManager().createQuery(
-                "SELECT p from Pregunta p WHERE p.numeroPregunta = :numero", Pregunta.class
-        );
-        query.setParameter("numero", numeroSiguiente);
+        if (pendientes != null && !pendientes.isEmpty()) {
+            // Tomamos la siguiente pregunta aleatoria de la baraja
+            String siguienteId = pendientes.remove(0);
 
-        List<Pregunta> resultados = query.getResultList();
-
-        if(!resultados.isEmpty()){
-            Pregunta siguientePregunta = resultados.get(0);
+            // Actualizamos la baraja en memoria y el reloj para la nueva pregunta
+            getView().putObject("preguntasPendientes", pendientes);
+            getView().putObject("horaInicioPregunta", horaClic);
 
             // [FRONT: Aquí OpenXava recarga la imagen de la nueva matriz en el navegador]
-            getView().setValue("pregunta.id", siguientePregunta.getId());
+            getView().setValue("pregunta.id", siguienteId);
 
             // Limpiamos el ComboBox para que la nueva figura esté sin responder
             getView().setValue("opcionSeleccionada", null);
 
-            // Reiniciamos el cronómetro interno para la nueva pregunta
-            getView().setValue("horaInicioTemporal", horaClic);
-        }
-        else {
+        } else {
             // SI YA NO HAY MÁS PREGUNTAS (FIN DE LA PRUEBA):
-            // [FRONT: Evento para mostrar pantalla final o HTML de resultados]
             addMessage("¡Has respondido todas las preguntas! Prueba completada.");
+            closeDialog();
         }
     }
 }
