@@ -34,13 +34,13 @@ public class IniciarEvaluacionAction extends ViewBaseAction {
 
         // LÓGICA DE VISTA: La vista del estudiante
         // [FRONT: En esta parte OpenXava descarta la vista anterior y carga la "PantallaPrueba"]
-        getView().setValue("evaluacion.id", nuevaEvaluacion.getOid());
+        getView().setValue("evaluacion.oid", nuevaEvaluacion.getOid());
         getView().setValue("pregunta.id", primeraPregunta.getId());
 
         //cronómetros ocultos
         getView().setValue("horaInicioTemporal",  horaInicioPrueba);
         // Se guarda el inicio general para calcular el tiempo total al finalizar.
-        getView().setValue("HoraInicioTemporalPruebaGeneral", horaInicioPrueba);
+        getView().setValue("horaInicioTemporalPruebaGeneral", horaInicioPrueba);
 
 
         addMessage("La prueba de Figuras Idénticas ha comenzado.");

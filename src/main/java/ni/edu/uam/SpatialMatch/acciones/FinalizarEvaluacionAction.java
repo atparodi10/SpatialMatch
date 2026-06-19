@@ -15,7 +15,7 @@ public class FinalizarEvaluacionAction extends ViewBaseAction {
         LocalDateTime horaFinalPrueba = LocalDateTime.now();
         LocalDateTime horaInicioPrueba = (LocalDateTime) getView().getValue("horaInicioTemporalPruebaGeneral");
 
-        String idEvaluacion = getView().getValueString("evaluacion.Oid");
+        String idEvaluacion = getView().getValueString("evaluacion.oid");
         Evaluacion evaluacion = XPersistence.getManager().find(Evaluacion.class, idEvaluacion);
 
         // Calcular el tiempo total de la prueba

@@ -32,7 +32,7 @@ public class SiguientePreguntaAction extends ViewBaseAction {
         LocalDateTime horaInicioPregunta = (LocalDateTime) getView().getValue("horaInicioTemporal");
 
 
-        String idEvaluacion = getView().getValueString("evaluacion.id");
+        String idEvaluacion = getView().getValueString("evaluacion.oid");
         String idPreguntaActual = getView().getValueString("pregunta.id");
 
         Evaluacion evaluacion = XPersistence.getManager().find(Evaluacion.class, idEvaluacion);
@@ -50,7 +50,7 @@ public class SiguientePreguntaAction extends ViewBaseAction {
 
         // (Lógica para cargar la siguiente pregunta a la vista)
 
-        int numeroSiguiente = preguntaActual.getNumeroPregunta();
+        int numeroSiguiente = preguntaActual.getNumeroPregunta() + 1;
 
         TypedQuery<Pregunta> query = XPersistence.getManager().createQuery(
                 "SELECT p from Pregunta p WHERE p.numeroPregunta = :numero", Pregunta.class
