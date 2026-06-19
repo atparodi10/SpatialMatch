@@ -30,9 +30,9 @@ public class Pregunta {
     @Column(nullable = false, unique = true)
     private int numeroPregunta;
 
-    @Column(length = 255)
-    @Required
-    private String identificadorFigura;
+    @Stereotype("PHOTO")
+    @Lob
+    private byte[] imagenFigura;
 
     @Enumerated(EnumType.STRING)
     @Required
