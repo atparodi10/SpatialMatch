@@ -13,37 +13,43 @@ public class FinalizarEvaluacionAction extends ViewBaseAction {
     @Override
     public void execute() throws Exception {
         LocalDateTime horaFinalPrueba = LocalDateTime.now();
-        LocalDateTime horaInicioPrueba = (LocalDateTime) getView().getValue("horaInicioTemporalPruebaGeneral");
+        LocalDateTime horaInicioPrueba = (LocalDateTime) getView().getObject("horaInicioTemporalPruebaGeneral");
 
         String idEvaluacion = getView().getValueString("evaluacion.oid");
         Evaluacion evaluacion = XPersistence.getManager().find(Evaluacion.class, idEvaluacion);
 
-        // Calcular el tiempo total de la prueba
-        if (horaInicioPrueba != null) {
-            long tiempoTotal = ChronoUnit.SECONDS.between(horaInicioPrueba, horaFinalPrueba);
-            evaluacion.setTiempoTotalPrueba(tiempoTotal);
-        }
+        // Validación de seguridad: Asegurarnos de que existe
+        if (evaluacion != null) {
+            // Calcular el tiempo total de la prueba
+            if (horaInicioPrueba != null) {
+                long tiempoTotal = ChronoUnit.SECONDS.between(horaInicioPrueba, horaFinalPrueba);
+                evaluacion.setTiempoTotalPrueba(tiempoTotal);
+            }
 
-        // Calcular el puntaje final sumando los registros
-        int puntosTotales = 0;
-        Collection<RegistroRespuesta> registros = evaluacion.getRegistroRespuestas();
-        if (registros != null) {
-            for (RegistroRespuesta respuesta : registros) {
-                if (respuesta.isEsCorrecta()) {
-                    puntosTotales++;
+            // Calcular el puntaje final sumando los registros
+            int puntosTotales = 0;
+            Collection<RegistroRespuesta> registros = evaluacion.getRegistroRespuestas();
+            if (registros != null) {
+                for (RegistroRespuesta respuesta : registros) {
+                    if (respuesta.isEsCorrecta()) {
+                        puntosTotales++;
+                    }
                 }
             }
+            evaluacion.setPuntajeFinal(puntosTotales);
+
+            evaluacion.generarRetroalimentacion();
+
+            // Guardamos los cálculos finales
+            XPersistence.getManager().merge(evaluacion);
         }
-        evaluacion.setPuntajeFinal(puntosTotales);
-
-        evaluacion.generarRetroalimentacion();
-
-        // Guardamos los cálculos finales
-        XPersistence.getManager().merge(evaluacion);
 
         // [FRONTEND: Aquí se puede redirigir al estudiante a un HTML de "Resultados"
         // o mostrar una ventana emergente (modal) con su puntaje final]
 
         addMessage("Prueba finalizada con éxito. Respuestas enviadas.");
+
+        // Cerrar la ventana emergente de la prueba
+        closeDialog();
     }
 }
