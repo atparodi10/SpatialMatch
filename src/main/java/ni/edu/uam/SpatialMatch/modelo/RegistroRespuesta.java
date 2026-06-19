@@ -17,7 +17,7 @@ import java.time.temporal.ChronoUnit;
         members =
                 "Informacion del Ejercicio [" +
                         "   pregunta.numeroPregunta;" +
-                        "   pregunta.imagenMatriz;" +
+                        "   pregunta.identificadorFigura;" +
                         "];" +
                         "Tu Respuesta [" +
                         "   opcionSeleccionada" +
