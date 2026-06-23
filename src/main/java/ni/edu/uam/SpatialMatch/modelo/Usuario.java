@@ -78,3 +78,15 @@ public class Usuario {
 			throw new RuntimeException("Error al encriptar la contrasena", ex);
 		}
 	}
+
+	/**
+	 * Interceptor de JPA: Se ejecuta automaticamente antes de GUARDAR o ACTUALIZAR.
+	 */
+	@PrePersist
+	@PreUpdate
+	private void encriptarAntesDeGuardar() {
+		// Solo encriptamos si la contrasena no tiene 64 caracteres
+		if (this.password != null && this.password.length() != 64) {
+			this.password = generarHash(this.password);
+		}
+	}
