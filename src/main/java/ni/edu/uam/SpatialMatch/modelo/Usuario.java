@@ -55,3 +55,7 @@ public class Usuario {
 	@Column
 	@ReadOnly
 	private boolean sesionActiva = false;
+
+	@OneToMany(mappedBy = "usuario")
+	@ListProperties("fechaCreacion, puntajeFinal, tiempoTotalPrueba, retroalimentacion")
+	private Collection<Evaluacion> evaluaciones;
