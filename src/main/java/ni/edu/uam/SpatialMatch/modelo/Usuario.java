@@ -33,7 +33,7 @@ public class Usuario {
 	@Required
 	private String apellido;
 
-	@Column(length = 50)
+	@Column(length = 100, unique = true)
 	@Required
 	@Stereotype("EMAIL")
 	private String correo;
