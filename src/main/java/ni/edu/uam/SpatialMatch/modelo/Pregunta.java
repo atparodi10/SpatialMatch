@@ -61,3 +61,23 @@ public class Pregunta {
     @Column(length = 100)
     @Required
     private String identificadorFigura;
+
+    @Stereotype("PHOTO")
+    @Lob
+    private byte[] imagenFigura;
+
+    @Stereotype("PHOTO")
+    @Lob
+    private byte[] imagenOpcionA;
+
+    @Stereotype("PHOTO")
+    @Lob
+    private byte[] imagenOpcionB;
+
+    @Stereotype("PHOTO")
+    @Lob
+    private byte[] imagenOpcionC;
+
+    @Stereotype("PHOTO")
+    @Lob
+    private byte[] imagenOpcionD;
