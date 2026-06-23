@@ -43,13 +43,15 @@ public class Usuario {
 	@Stereotype("PASSWORD")
 	private String password;
 
-	@Column(length = 50)
+	public enum RolUsuario {
+		ADMIN, ENCUESTADO
+	}
+
+	@Enumerated(EnumType.STRING)
+	@Column(length = 20)
 	@Required
-	private String rol;
+	private RolUsuario rol;
 
-	@OneToMany(mappedBy = "usuario")
-	@ListProperties("fechaCreacion, puntajeFinal, tiempoTotalPrueba, retroalimentacion")
-	private Collection<Evaluacion> evaluaciones;
-
-	
-}
+	@Column
+	@ReadOnly
+	private boolean sesionActiva = false;
