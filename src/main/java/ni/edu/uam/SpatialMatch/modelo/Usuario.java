@@ -38,6 +38,11 @@ public class Usuario {
 	@Stereotype("EMAIL")
 	private String correo;
 
+	@Column(length = 64)
+	@Required
+	@Stereotype("PASSWORD")
+	private String password;
+
 	@Column(length = 50)
 	@Required
 	private String rol;
