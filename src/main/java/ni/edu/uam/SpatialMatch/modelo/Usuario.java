@@ -90,3 +90,25 @@ public class Usuario {
 			this.password = generarHash(this.password);
 		}
 	}
+
+	public boolean iniciarSesion(String correo, String passwordEnPlano) {
+		if (correo == null || passwordEnPlano == null || correo.trim().isEmpty() || passwordEnPlano.trim().isEmpty()) {
+			throw new IllegalArgumentException("Error: Alguno de los campos requeridos se encuentra vacio.");
+		}
+		if (!this.correo.equalsIgnoreCase(correo.trim())) {
+			throw new SecurityException("Error: El correo electronico proporcionado no coincide con el registro.");
+		}
+		String intentoHash = generarHash(passwordEnPlano);
+		if (!this.password.equals(intentoHash)) {
+			throw new SecurityException("Error: La contrasena ingresada es incorrecta.");
+		}
+		return true;
+	}
+
+	public void cerrarSesion() {
+		if (this.sesionActiva) {
+			this.sesionActiva = false;
+		} else {
+			throw new IllegalStateException("Error: El usuario ya se encuentra desconectado.");
+		}
+	}
