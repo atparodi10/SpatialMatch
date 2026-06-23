@@ -81,3 +81,7 @@ public class Pregunta {
     @Stereotype("PHOTO")
     @Lob
     private byte[] imagenOpcionD;
+
+    @Enumerated(EnumType.STRING)
+    @Required
+    private OpcionValida respuestaCorrecta;
