@@ -112,3 +112,9 @@ public class Usuario {
 			throw new IllegalStateException("Error: El usuario ya se encuentra desconectado.");
 		}
 	}
+
+	@Override
+	public String toString() {
+		return nombre + " " + apellido;
+	}
+}
