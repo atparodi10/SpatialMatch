@@ -85,3 +85,13 @@ public class Pregunta {
     @Enumerated(EnumType.STRING)
     @Required
     private OpcionValida respuestaCorrecta;
+
+    /**
+     * Valida si la opcion proporcionada por el usuario coincide con la respuesta correcta.
+     */
+    public boolean validarRespuesta(String respuestaUsuario) {
+        if (respuestaUsuario == null || this.respuestaCorrecta == null) {
+            return false;
+        }
+        return this.respuestaCorrecta.name().equalsIgnoreCase(respuestaUsuario.trim());
+    }
