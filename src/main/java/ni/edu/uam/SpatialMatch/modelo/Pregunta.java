@@ -45,3 +45,19 @@ public class Pregunta {
     public enum OpcionValida {
         A, B, C, D
     }
+
+    @Id
+    @GeneratedValue(generator = "system-uuid")
+    @Hidden
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    @Column(length = 32)
+    private String id;
+
+    @Min(value = 1, message = "El numero minimo de pregunta es 1")
+    @Max(value = 20, message = "El numero maximo de preguntas es 20")
+    @Column(nullable = false, unique = true)
+    private int numeroPregunta;
+
+    @Column(length = 100)
+    @Required
+    private String identificadorFigura;
