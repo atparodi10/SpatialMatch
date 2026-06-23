@@ -41,3 +41,7 @@ import lombok.Setter;
         )
 })
 public class Pregunta {
+
+    public enum OpcionValida {
+        A, B, C, D
+    }
