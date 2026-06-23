@@ -12,7 +12,10 @@ import org.openxava.model.*;
 
 import lombok.*;
 
-@Entity @Getter @Setter
+@Entity
+@Getter
+@Setter
+@Tab(properties = "nombre, apellido, correo, rol, sesionActiva")
 public class Usuario {
 
 	@Id
