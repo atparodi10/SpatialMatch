@@ -12,10 +12,6 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-
-@Entity
-@Getter
-@Setter
 @Views({
         @View(
                 members =
@@ -95,3 +91,9 @@ public class Pregunta {
         }
         return this.respuestaCorrecta.name().equalsIgnoreCase(respuestaUsuario.trim());
     }
+
+    @Override
+    public String toString() {
+        return numeroPregunta + " - " + (identificadorFigura != null ? identificadorFigura : "");
+    }
+}
