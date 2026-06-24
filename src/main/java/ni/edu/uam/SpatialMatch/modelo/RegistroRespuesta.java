@@ -22,5 +22,8 @@ import java.util.Date;
                         "]"
 )
 public class RegistroRespuesta {
+    public enum OpcionValida {
+        A, B, C, D
+    }
 
 }
