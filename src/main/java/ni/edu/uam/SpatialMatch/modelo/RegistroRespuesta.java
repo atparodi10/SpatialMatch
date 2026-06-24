@@ -39,4 +39,20 @@ public class RegistroRespuesta {
     @Editor(forViews = "PantallaPrueba", value = "ValidValuesRadioButton")
     private OpcionValida opcionSeleccionada;
 
+    @Column
+    @ReadOnly
+    private boolean esCorrecta;
+
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    @ReadOnly
+    @Stereotype("DATETIME")
+    private Date horaInicio;
+
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    @ReadOnly
+    @Stereotype("DATETIME")
+    private Date horaRespuesta;
+
 }
