@@ -20,8 +20,6 @@ public class FinalizarEvaluacionAction extends ViewBaseAction {
             addError("No se encontro la evaluacion activa.");
             closeDialog();
             return;
-
-
         }
 
         Evaluacion evaluacion = XPersistence.getManager().find(Evaluacion.class, idEvaluacion);
@@ -31,6 +29,7 @@ public class FinalizarEvaluacionAction extends ViewBaseAction {
             closeDialog();
             return;
         }
+
         if (horaInicioPrueba != null) {
             long tiempoTotal = (horaFinalPrueba.getTime() - horaInicioPrueba.getTime()) / 1000;
             evaluacion.setTiempoTotalPrueba(tiempoTotal);
@@ -42,7 +41,6 @@ public class FinalizarEvaluacionAction extends ViewBaseAction {
         ).setParameter("idEvaluacion", idEvaluacion).getSingleResult();
 
         evaluacion.setPuntajeFinal(puntosTotales.intValue());
-
         evaluacion.generarRetroalimentacion();
 
         XPersistence.getManager().merge(evaluacion);
@@ -50,7 +48,13 @@ public class FinalizarEvaluacionAction extends ViewBaseAction {
 
         addMessage("Prueba finalizada con exito. Puntaje obtenido: " + puntosTotales + " respuestas correctas.");
         closeDialog();
-
-
     }
 
+    private String obtenerObjetoComoTexto(String clave) {
+        Object valor = getView().getObject(clave);
+        if (valor == null || valor.toString().trim().isEmpty()) {
+            return null;
+        }
+        return valor.toString();
+    }
+}
