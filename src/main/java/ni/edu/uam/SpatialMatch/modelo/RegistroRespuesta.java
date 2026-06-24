@@ -55,4 +55,8 @@ public class RegistroRespuesta {
     @Stereotype("DATETIME")
     private Date horaRespuesta;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @NoCreate @NoModify @NoSearch
+    private Evaluacion evaluacion;
+
 }
