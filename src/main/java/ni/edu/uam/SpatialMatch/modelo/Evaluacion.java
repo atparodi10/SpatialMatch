@@ -89,4 +89,11 @@ public class Evaluacion {
         }
         return this.retroalimentacion;
     }
+
+    @Override
+    public String toString() {
+        return (usuario != null ? usuario.getNombre() + " " + usuario.getApellido() : "Evaluacion")
+                + " - " + fechaCreacion;
+    }
+
 }
