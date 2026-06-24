@@ -32,4 +32,11 @@ public class RegistroRespuesta {
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     @Column(length = 36)
     private String id;
+
+    @Enumerated(EnumType.STRING)
+    @Column(length = 5)
+    @Required(message = "Debes seleccionar una opcion antes de continuar")
+    @Editor(forViews = "PantallaPrueba", value = "ValidValuesRadioButton")
+    private OpcionValida opcionSeleccionada;
+
 }
