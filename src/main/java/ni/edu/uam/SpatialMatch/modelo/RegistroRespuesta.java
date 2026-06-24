@@ -26,4 +26,10 @@ public class RegistroRespuesta {
         A, B, C, D
     }
 
+    @Id
+    @GeneratedValue(generator = "system-uuid")
+    @Hidden
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    @Column(length = 36)
+    private String id;
 }
