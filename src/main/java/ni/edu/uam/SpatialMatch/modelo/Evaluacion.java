@@ -56,4 +56,17 @@ public class Evaluacion {
     @ListProperties("pregunta.numeroPregunta, pregunta.identificadorFigura, opcionSeleccionada, resultadoCorreccion, horaInicio, horaRespuesta")
     private Collection<RegistroRespuesta> registroRespuestas;
 
+    public int calcularPuntaje() {
+        int puntajeTemporal = 0;
+        if (this.registroRespuestas != null) {
+            for (RegistroRespuesta respuesta : this.registroRespuestas) {
+                if (respuesta.isEsCorrecta()) {
+                    puntajeTemporal++;
+                }
+            }
+        }
+        this.puntajeFinal = puntajeTemporal;
+        return this.puntajeFinal;
+    }
+
 }
