@@ -16,6 +16,14 @@ public class SiguientePreguntaAction extends ViewBaseAction {
 
     @Override
     public void execute() throws Exception {
+        Date horaClic = new Date();
+
+        Object valorVista = getView().getValue("opcionSeleccionada");
+        if (valorVista == null || valorVista.toString().trim().isEmpty()) {
+            addError("Debes seleccionar una opcion antes de continuar.");
+            return;
+        }
+
 
     }
 }
