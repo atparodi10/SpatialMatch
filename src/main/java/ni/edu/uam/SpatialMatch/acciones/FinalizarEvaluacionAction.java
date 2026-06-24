@@ -23,5 +23,13 @@ public class FinalizarEvaluacionAction extends ViewBaseAction {
 
 
         }
+
+        Evaluacion evaluacion = XPersistence.getManager().find(Evaluacion.class, idEvaluacion);
+
+        if (evaluacion == null) {
+            addError("No se pudo encontrar la evaluacion en la base de datos.");
+            closeDialog();
+            return;
+        }
 }
 
