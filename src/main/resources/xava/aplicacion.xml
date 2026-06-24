@@ -2,23 +2,29 @@
 
 <!DOCTYPE aplicacion SYSTEM "dtds/aplicacion.dtd">
 
-<aplicacion nombre="SpatialMatch"> 
-	
-	<!--
-	Un módulo por defecto se asume para cada
-	controlador en <modulo-defecto/> 
-	-->
-	<modulo-defecto>		  
-		<controlador nombre="Typical"/>		
-	</modulo-defecto>
-	
-	<!--
-	Podemos definir módulos adicionales, por ejemplo: 	
-	<modulo nombre="ProfesorSoloLectura">
-		<modelo nombre="Profesor"/>
-		<controlador nombre="Print"/>
-	</modulo>		
-	-->	  
-		
-</aplicacion>
+<aplicacion nombre="SpatialMatch">
 
+	<modulo-defecto>
+		<controlador nombre="Typical"/>
+	</modulo-defecto>
+
+	<!-- Modulo para gestionar Usuarios -->
+	<modulo nombre="Usuario">
+		<modelo nombre="Usuario"/>
+		<controlador nombre="Typical"/>
+	</modulo>
+
+	<!-- Modulo para gestionar Preguntas -->
+	<modulo nombre="Pregunta">
+		<modelo nombre="Pregunta"/>
+		<controlador nombre="Typical"/>
+	</modulo>
+
+	<!-- Modulo Evaluacion: los controladores se definen via @Controllers en la entidad -->
+	<modulo nombre="Evaluacion">
+		<modelo nombre="Evaluacion"/>
+		<controlador nombre="Typical"/>
+		<controlador nombre="EvaluacionController"/>
+	</modulo>
+
+</aplicacion>

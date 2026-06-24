@@ -1,3 +1,100 @@
 /*
-Pon aquí tu propio estilo
-*/
+ * SpatialMatch - Estilos personalizados
+ * Proyecto: Prueba Espacial de Figuras Identicas
+ * Universidad Americana (UAM)
+ */
+
+/* Estilo general de la aplicacion */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Destacar la imagen de la figura en la prueba */
+.ox-image-editor img,
+.xava_image img {
+    border: 3px solid #2c5f8a;
+    border-radius: 8px;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: block;
+    margin: 10px auto;
+}
+
+/* La figura principal puede verse grande, las opciones deben verse compactas */
+td[id*="imagenOpcion"] .ox-image-editor img,
+td[id*="imagenOpcion"] .xava_image img {
+    max-width: 140px;
+    max-height: 140px;
+    object-fit: contain;
+    background: #fff;
+}
+
+/* Estilo para los botones de accion de la prueba */
+.ox-button-bar .xava_action[id*="siguientePregunta"],
+.ox-button-bar .xava_action[id*="iniciarPrueba"] {
+    background-color: #2c5f8a;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.ox-button-bar .xava_action[id*="finalizarPrueba"] {
+    background-color: #c0392b;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+/* Panel de informacion del ejercicio */
+.xava_group_label {
+    color: #2c5f8a;
+    font-weight: bold;
+    font-size: 1.1em;
+    border-bottom: 2px solid #2c5f8a;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+/* Numero de pregunta resaltado */
+td[id*="numeroPregunta"] input,
+td[id*="identificadorFigura"] input {
+    font-weight: bold;
+    color: #2c5f8a;
+    font-size: 1.1em;
+}
+
+/* Selector de respuesta destacado */
+td[id*="opcionSeleccionada"] select {
+    font-size: 1.2em;
+    padding: 8px;
+    border: 2px solid #2c5f8a;
+    border-radius: 5px;
+    width: 150px;
+    cursor: pointer;
+}
+
+td[id*="opcionSeleccionada"] label {
+    font-weight: bold;
+    color: #2c5f8a;
+    margin-right: 14px;
+}
+
+td[id*="opcionSeleccionada"] input[type="radio"] {
+    margin-right: 6px;
+}
+
+/* Header de la aplicacion */
+.xava_application_bar {
+    background-color: #1a3a5c;
+}
+
+/* Retroalimentacion con colores segun resultado */
+td[id*="retroalimentacion"] textarea {
+    border-left: 5px solid #2c5f8a;
+    padding-left: 10px;
+    font-style: italic;
+    color: #333;
+    background-color: #f0f7ff;
+}

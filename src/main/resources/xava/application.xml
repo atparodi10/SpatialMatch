@@ -1,0 +1,32 @@
+<?xml version = "1.0" encoding = "ISO-8859-1"?>
+
+<!DOCTYPE application SYSTEM "dtds/application.dtd">
+
+<application name="SpatialMatch">
+
+	<default-module>
+		<controller name="Typical"/>
+	</default-module>
+
+	<module name="Usuario">
+		<model name="Usuario"/>
+		<controller name="Typical"/>
+	</module>
+
+	<module name="Pregunta">
+		<model name="Pregunta"/>
+		<controller name="Typical"/>
+	</module>
+
+	<module name="Evaluacion">
+		<model name="Evaluacion"/>
+		<controller name="Typical"/>
+		<controller name="EvaluacionController"/>
+	</module>
+
+	<module name="RegistroRespuesta">
+		<model name="RegistroRespuesta"/>
+		<controller name="Typical"/>
+	</module>
+
+</application>
