@@ -43,6 +43,14 @@ public class FinalizarEvaluacionAction extends ViewBaseAction {
 
         evaluacion.setPuntajeFinal(puntosTotales.intValue());
 
+        evaluacion.generarRetroalimentacion();
+
+        XPersistence.getManager().merge(evaluacion);
+        XPersistence.getManager().flush();
+
+        addMessage("Prueba finalizada con exito. Puntaje obtenido: " + puntosTotales + " respuestas correctas.");
+        closeDialog();
+
 
     }
 
