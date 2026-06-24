@@ -59,4 +59,9 @@ public class RegistroRespuesta {
     @NoCreate @NoModify @NoSearch
     private Evaluacion evaluacion;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ReadOnly(forViews = "PantallaPrueba")
+    @ReferenceView(value = "ParaPrueba", forViews = "PantallaPrueba")
+    @NoCreate @NoModify @NoSearch
+    private Pregunta pregunta;
 }
