@@ -12,7 +12,16 @@ public class FinalizarEvaluacionAction extends ViewBaseAction {
 
     @Override
     public void execute() throws Exception {
+        Date horaFinalPrueba = new Date();
+        Date horaInicioPrueba = (Date) getView().getObject("horaInicioTemporalPruebaGeneral");
 
-    }
+        String idEvaluacion = obtenerObjetoComoTexto(EVALUACION_ACTIVA_ID);
+        if (idEvaluacion == null) {
+            addError("No se encontro la evaluacion activa.");
+            closeDialog();
+            return;
+
+
+        }
 }
 
