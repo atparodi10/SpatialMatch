@@ -34,4 +34,17 @@ public class Evaluacion {
     @DefaultValueCalculator(CurrentLocalDateCalculator.class)
     private LocalDate fechaCreacion;
 
+    @Column
+    @ReadOnly
+    private int puntajeFinal;
+
+    @Column
+    @ReadOnly
+    private long tiempoTotalPrueba;
+
+    @Column(columnDefinition = "TEXT")
+    @Stereotype("MEMO")
+    @ReadOnly
+    private String retroalimentacion;
+
 }
