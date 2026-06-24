@@ -47,4 +47,10 @@ public class Evaluacion {
     @ReadOnly
     private String retroalimentacion;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @DescriptionsList(descriptionProperties = "nombre, apellido")
+    @Required
+    private Usuario usuario;
+
+
 }
