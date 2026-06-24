@@ -64,4 +64,14 @@ public class RegistroRespuesta {
     @ReferenceView(value = "ParaPrueba", forViews = "PantallaPrueba")
     @NoCreate @NoModify @NoSearch
     private Pregunta pregunta;
+
+    @PrePersist
+    @PreUpdate
+    private void evaluarRespuestaAutomatica() {
+        if (this.pregunta != null && this.opcionSeleccionada != null) {
+            this.esCorrecta = this.pregunta.validarRespuesta(this.opcionSeleccionada.name());
+        } else {
+            this.esCorrecta = false;
+        }
+    }
 }
