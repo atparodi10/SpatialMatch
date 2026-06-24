@@ -1,4 +1,26 @@
 package ni.edu.uam.SpatialMatch.modelo;
 
+import javax.persistence.*;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.openxava.annotations.*;
+import lombok.Getter;
+import lombok.Setter;
+import java.util.Date;
+
+@Entity
+@Getter
+@Setter
+@View(
+        name = "PantallaPrueba",
+        members =
+                "Informacion del Ejercicio [" +
+                        "   pregunta;" +
+                        "];" +
+                        "Tu Respuesta [" +
+                        "   opcionSeleccionada" +
+                        "]"
+)
 public class RegistroRespuesta {
+
 }
