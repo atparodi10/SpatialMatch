@@ -74,4 +74,12 @@ public class RegistroRespuesta {
             this.esCorrecta = false;
         }
     }
+
+    public long calcularSegundosInvertidos() {
+        if (this.horaInicio != null && this.horaRespuesta != null) {
+            return (this.horaRespuesta.getTime() - this.horaInicio.getTime()) / 1000;
+        }
+        return 0;
+    }
+
 }
