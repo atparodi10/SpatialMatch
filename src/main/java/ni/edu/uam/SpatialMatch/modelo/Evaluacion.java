@@ -23,5 +23,15 @@ import java.util.Collection;
                 "registroRespuestas"
 )
 public class Evaluacion {
+    @Id
+    @GeneratedValue(generator = "system-uuid")
+    @Hidden
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    @Column(length = 36)
+    private String oid;
+
+    @Required
+    @DefaultValueCalculator(CurrentLocalDateCalculator.class)
+    private LocalDate fechaCreacion;
 
 }
