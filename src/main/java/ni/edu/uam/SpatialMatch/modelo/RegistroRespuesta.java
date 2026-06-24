@@ -82,4 +82,8 @@ public class RegistroRespuesta {
         return 0;
     }
 
+    public String getResultadoCorreccion() {
+        return this.esCorrecta ? "Es correcta" : "No es correcta";
+    }
+
 }
