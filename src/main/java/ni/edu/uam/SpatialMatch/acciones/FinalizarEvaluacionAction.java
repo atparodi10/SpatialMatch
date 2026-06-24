@@ -36,5 +36,13 @@ public class FinalizarEvaluacionAction extends ViewBaseAction {
             evaluacion.setTiempoTotalPrueba(tiempoTotal);
         }
 
+        Long puntosTotales = XPersistence.getManager().createQuery(
+                "SELECT COUNT(r) FROM RegistroRespuesta r WHERE r.evaluacion.oid = :idEvaluacion AND r.esCorrecta = true",
+                Long.class
+        ).setParameter("idEvaluacion", idEvaluacion).getSingleResult();
+
+        evaluacion.setPuntajeFinal(puntosTotales.intValue());
+
+
     }
 
