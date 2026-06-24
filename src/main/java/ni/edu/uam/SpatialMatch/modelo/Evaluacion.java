@@ -52,5 +52,8 @@ public class Evaluacion {
     @Required
     private Usuario usuario;
 
+    @OneToMany(mappedBy = "evaluacion", cascade = CascadeType.ALL)
+    @ListProperties("pregunta.numeroPregunta, pregunta.identificadorFigura, opcionSeleccionada, resultadoCorreccion, horaInicio, horaRespuesta")
+    private Collection<RegistroRespuesta> registroRespuestas;
 
 }
