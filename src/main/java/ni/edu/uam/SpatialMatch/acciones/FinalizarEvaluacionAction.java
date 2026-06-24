@@ -31,5 +31,10 @@ public class FinalizarEvaluacionAction extends ViewBaseAction {
             closeDialog();
             return;
         }
-}
+        if (horaInicioPrueba != null) {
+            long tiempoTotal = (horaFinalPrueba.getTime() - horaInicioPrueba.getTime()) / 1000;
+            evaluacion.setTiempoTotalPrueba(tiempoTotal);
+        }
+
+    }
 
